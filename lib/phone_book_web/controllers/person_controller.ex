@@ -4,7 +4,11 @@ defmodule PhoneBookWeb.PersonController do
   alias PhoneBook.Book
   alias PhoneBook.Book.Person
 
+  # return up to 10 user id's
+  # paginate
+  # if more than ten return token for next page info
   def index(conn, _params) do
+    _token = PhoneBook.Vault.encrypt({1, 2}, :default)
     people = Book.list_people()
     render(conn, "index.html", people: people)
   end

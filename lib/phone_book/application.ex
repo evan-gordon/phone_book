@@ -1,6 +1,4 @@
 defmodule PhoneBook.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
   @moduledoc false
 
   use Application
@@ -8,22 +6,15 @@ defmodule PhoneBook.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      # Start the Ecto repository
       PhoneBook.Repo,
-      # Start the endpoint when the application starts
+      PhoneBook.Vault,
       PhoneBookWeb.Endpoint
-      # Starts a worker by calling: PhoneBook.Worker.start_link(arg)
-      # {PhoneBook.Worker, arg},
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: PhoneBook.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
-  # Tell Phoenix to update the endpoint configuration
-  # whenever the application is updated.
   def config_change(changed, _new, removed) do
     PhoneBookWeb.Endpoint.config_change(changed, removed)
     :ok

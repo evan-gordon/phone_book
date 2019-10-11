@@ -16,11 +16,7 @@ defmodule PhoneBookWeb.Router do
   scope "/", PhoneBookWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", PersonController, :index
+    get "/detail/:id", PersonController, :show
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", PhoneBookWeb do
-  #   pipe_through :api
-  # end
 end
