@@ -16,7 +16,7 @@ defmodule PhoneBookWeb.Router do
   scope "/", PhoneBookWeb do
     pipe_through :browser
 
-    get "/", PersonController, :index
+    resources "/", PersonController, except: [:show]
     get "/detail/:id", PersonController, :show
   end
 end

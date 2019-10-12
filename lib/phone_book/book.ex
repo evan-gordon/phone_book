@@ -21,6 +21,12 @@ defmodule PhoneBook.Book do
     Repo.all(Person)
   end
 
+  def list_paginated_by_age(page, page_size) do
+    PhoneBook.Person
+    |> order_by(desc: :age)
+    |> PhoneBook.Repo.paginate(page: page, page_size: page_size)
+  end
+
   @doc """
   Gets a single person.
 
