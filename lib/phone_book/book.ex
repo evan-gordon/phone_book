@@ -21,8 +21,19 @@ defmodule PhoneBook.Book do
     Repo.all(Person)
   end
 
+  def list_youngest(limit_number) when is_integer(limit_number) do
+    from(p in Person,
+      where: not is_nil(p.phone_number),
+      order_by: p.name,
+      limit: ^limit_number
+    )
+    |> Repo.all()
+  end
+
   def list_paginated_by_age(page, page_size) do
+    # query_result =
     PhoneBook.Person
+    |> select([:id])
     |> order_by(desc: :age)
     |> PhoneBook.Repo.paginate(page: page, page_size: page_size)
   end
@@ -53,12 +64,20 @@ defmodule PhoneBook.Book do
 
       iex> create_person(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
   """
   def create_person(attrs \\ %{}) do
     %Person{}
     |> Person.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Same as `create_person/1` but raises if changeset is invalid
+  """
+  def create_person!(attrs \\ %{}) do
+    %Person{}
+    |> Person.changeset(attrs)
+    |> Repo.insert!()
   end
 
   @doc """
