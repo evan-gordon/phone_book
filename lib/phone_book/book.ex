@@ -31,8 +31,7 @@ defmodule PhoneBook.Book do
   end
 
   def list_paginated_by_age(page, page_size) do
-    # query_result =
-    PhoneBook.Person
+    PhoneBook.Book.Person
     |> select([:id])
     |> order_by(desc: :age)
     |> PhoneBook.Repo.paginate(page: page, page_size: page_size)

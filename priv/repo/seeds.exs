@@ -64,7 +64,8 @@ people_data = [
   },
   %{
     name: "Band, James Band",
-    age: 35
+    age: 35,
+    phone_number: 1 - 007 - 007 - 007
   }
 ]
 

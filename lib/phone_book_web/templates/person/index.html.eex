@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Id</th>
       <th>Name</th>
       <th>Age</th>
       <th>Phone number</th>
@@ -15,11 +16,12 @@
   <tbody>
 <%= for person <- @people do %>
     <tr>
-      <td><%= person.name %></td>
-      <td><%= person.age %></td>
-      <td><%= person.phone_number %></td>
-      <td><%= person.photo %></td>
-      <td><%= person.bio %></td>
+        <td><%= person.id %></td>
+        <td><%= person.name %></td>
+        <td><%= person.age %></td>
+        <td><%= person.phone_number %></td>
+        <td><%= person.photo %></td>
+        <td><%= person.bio %></td>
 
       <td>
         <span><%= link "Show", to: Routes.person_path(@conn, :show, person) %></span>
@@ -30,5 +32,9 @@
 <% end %>
   </tbody>
 </table>
+
+<%= if assigns[:token] do %>
+  <div>Token: <%=@token %></div>
+<% end %>
 
 <div><span><%= link "New Person", to: Routes.person_path(@conn, :new)%></span></div>

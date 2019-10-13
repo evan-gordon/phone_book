@@ -13,10 +13,13 @@ defmodule PhoneBookWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # typically here I would scope through /api/v{version_number}
   scope "/", PhoneBookWeb do
     pipe_through :browser
 
     resources "/", PersonController, except: [:show]
+    # configure endpoints required in problem description
+    get "/list", PersonController, :index
     get "/detail/:id", PersonController, :show
   end
 end

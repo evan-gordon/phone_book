@@ -3,8 +3,20 @@ defmodule PhoneBookWeb.PersonControllerTest do
 
   alias PhoneBook.Book
 
-  @create_attrs %{age: 42, bio: "some bio", name: "some name", phone_number: "some phone_number", photo: "some photo"}
-  @update_attrs %{age: 43, bio: "some updated bio", name: "some updated name", phone_number: "some updated phone_number", photo: "some updated photo"}
+  @create_attrs %{
+    age: 42,
+    bio: "some bio",
+    name: "some name",
+    phone_number: "1-234-456-789",
+    photo: "some photo"
+  }
+  @update_attrs %{
+    age: 43,
+    bio: "some updated bio",
+    name: "some updated name",
+    phone_number: "1-111-111-111",
+    photo: "some updated photo"
+  }
   @invalid_attrs %{age: nil, bio: nil, name: nil, phone_number: nil, photo: nil}
 
   def fixture(:person) do
@@ -16,6 +28,19 @@ defmodule PhoneBookWeb.PersonControllerTest do
     test "lists all people", %{conn: conn} do
       conn = get(conn, Routes.person_path(conn, :index))
       assert html_response(conn, 200) =~ "Listing People"
+    end
+
+    test "receives no token if less than 10 elements", %{conn: conn} do
+      conn = get(conn, "/list")
+      response = html_response(conn, 200)
+      assert response =~ "Listing People"
+      assert not (response =~ "Token: ")
+    end
+
+    test "receives token if more than 10 elements", %{conn: conn} do
+      Enum.each(1..11, fn _ -> fixture(:person) end)
+      conn = get(conn, "/list")
+      assert html_response(conn, 200) =~ "Token: "
     end
   end
 
@@ -75,6 +100,7 @@ defmodule PhoneBookWeb.PersonControllerTest do
     test "deletes chosen person", %{conn: conn, person: person} do
       conn = delete(conn, Routes.person_path(conn, :delete, person))
       assert redirected_to(conn) == Routes.person_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.person_path(conn, :show, person))
       end
