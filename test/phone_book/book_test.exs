@@ -10,14 +10,14 @@ defmodule PhoneBook.BookTest do
       age: 42,
       bio: "some bio",
       name: "some name",
-      phone_number: "1-234-567-890",
+      phone_number: "1-234-567-8900",
       photo: "some photo"
     }
     @update_attrs %{
       age: 43,
       bio: "some updated bio",
       name: "some updated name",
-      phone_number: "1-111-111-111",
+      phone_number: "1-111-111-1111",
       photo: "some updated photo"
     }
     @invalid_attrs %{age: nil, bio: nil, name: nil, phone_number: nil, photo: nil}
@@ -29,7 +29,7 @@ defmodule PhoneBook.BookTest do
       %{
         name: "Billy Gates",
         age: 99,
-        phone_number: "1-234-567-890",
+        phone_number: "1-234-567-8900",
         photo: "https://www.example.com/123",
         bio: "Hi I'm totally not the CEO of a multi-billion dollar company."
       },
@@ -92,7 +92,7 @@ defmodule PhoneBook.BookTest do
       assert person.age == 42
       assert person.bio == "some bio"
       assert person.name == "some name"
-      assert person.phone_number == "1-234-567-890"
+      assert person.phone_number == "1-234-567-8900"
       assert person.photo == "some photo"
     end
 
@@ -112,7 +112,7 @@ defmodule PhoneBook.BookTest do
       assert person.age == 43
       assert person.bio == "some updated bio"
       assert person.name == "some updated name"
-      assert person.phone_number == "1-111-111-111"
+      assert person.phone_number == "1-111-111-1111"
       assert person.photo == "some updated photo"
     end
 

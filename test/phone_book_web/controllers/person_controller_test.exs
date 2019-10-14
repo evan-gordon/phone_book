@@ -7,14 +7,14 @@ defmodule PhoneBookWeb.PersonControllerTest do
     age: 42,
     bio: "some bio",
     name: "some name",
-    phone_number: "1-234-456-789",
+    phone_number: "1-234-456-7890",
     photo: "some photo"
   }
   @update_attrs %{
     age: 43,
     bio: "some updated bio",
     name: "some updated name",
-    phone_number: "1-111-111-111",
+    phone_number: "1-111-111-1111",
     photo: "some updated photo"
   }
   @invalid_attrs %{age: nil, bio: nil, name: nil, phone_number: nil, photo: nil}
